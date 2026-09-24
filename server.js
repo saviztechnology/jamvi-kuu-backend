@@ -33,6 +33,273 @@ app.use(cors());
 app.use(express.json());
 
 // =====================================
+// JAMVI KUU TIPS - PRIVACY POLICY
+// =====================================
+
+app.get('/privacy-policy', (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jamvi Kuu Tips - Privacy Policy</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background: #080C10;
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      color: #00C853;
+    }
+
+    h2 {
+      color: #00C853;
+      margin-top: 30px;
+    }
+
+    p, li {
+      color: #dddddd;
+    }
+
+    .updated {
+      color: #999999;
+    }
+
+    a {
+      color: #00C853;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Jamvi Kuu Tips - Privacy Policy</h1>
+
+  <p class="updated">
+    Last updated: September 25, 2026
+  </p>
+
+  <p>
+    Jamvi Kuu Tips ("we", "us", or "our") operates the
+    Jamvi Kuu Tips mobile application ("App").
+  </p>
+
+  <p>
+    This Privacy Policy explains how we collect, use, store,
+    and protect information when you use the App.
+  </p>
+
+  <h2>1. Information We Collect</h2>
+
+  <h3>Account Information</h3>
+
+  <p>When you create an account, we may collect:</p>
+
+  <ul>
+    <li>Phone number</li>
+    <li>User ID</li>
+    <li>Account information</li>
+    <li>Account role</li>
+    <li>VIP/Premium subscription status</li>
+    <li>VIP subscription start and expiry information</li>
+  </ul>
+
+  <h3>App and Usage Information</h3>
+
+  <p>
+    We may process information related to your use of the App,
+    including tips and content you access, Premium features,
+    app interactions, and notification-related information.
+  </p>
+
+  <h3>Payment Information</h3>
+
+  <p>
+    Jamvi Kuu Tips may provide Premium/VIP payments through
+    third-party payment services.
+  </p>
+
+  <p>
+    Payment providers may process payment information according
+    to their own privacy policies and terms.
+  </p>
+
+  <p>
+    We do not intend to store users' complete bank card numbers,
+    CVV codes, passwords, or payment authentication codes in
+    our own database.
+  </p>
+
+  <h3>Advertising Information</h3>
+
+  <p>
+    The App may display advertisements using Google AdMob.
+    Google and its advertising partners may process information
+    such as device or advertising identifiers and information
+    related to advertising requests and interactions, subject to
+    applicable policies and settings.
+  </p>
+
+  <h2>2. How We Use Information</h2>
+
+  <ul>
+    <li>Create and manage user accounts</li>
+    <li>Authenticate users</li>
+    <li>Provide football tips and match information</li>
+    <li>Provide Premium/VIP services</li>
+    <li>Process and verify Premium payments</li>
+    <li>Send notifications</li>
+    <li>Display advertisements</li>
+    <li>Maintain and improve the App</li>
+    <li>Prevent unauthorized access and misuse</li>
+    <li>Troubleshoot technical problems</li>
+  </ul>
+
+  <h2>3. Firebase Services</h2>
+
+  <p>
+    Jamvi Kuu Tips uses Firebase services provided by Google,
+    including authentication, database storage, and notifications.
+  </p>
+
+  <h2>4. Advertising</h2>
+
+  <p>
+    Jamvi Kuu Tips may use Google AdMob to display advertisements.
+    Advertisements may be personalized or non-personalized
+    depending on applicable settings, consent requirements,
+    device settings, and Google's advertising policies.
+  </p>
+
+  <h2>5. Data Sharing</h2>
+
+  <p>
+    We may share or allow access to information with service
+    providers necessary to operate the App, including:
+  </p>
+
+  <ul>
+    <li>Google Firebase</li>
+    <li>Google AdMob</li>
+    <li>Payment service providers</li>
+    <li>Infrastructure and hosting providers</li>
+  </ul>
+
+  <p>
+    We do not sell users' personal information as a standalone
+    commercial product.
+  </p>
+
+  <h2>6. Data Security</h2>
+
+  <p>
+    We take reasonable technical and organizational measures
+    to protect information against unauthorized access,
+    alteration, disclosure, or destruction.
+  </p>
+
+  <p>
+    However, no internet transmission or electronic storage
+    system can be guaranteed to be completely secure.
+  </p>
+
+  <h2>7. Data Retention</h2>
+
+  <p>
+    We retain information for as long as reasonably necessary
+    to provide our services, maintain account records, comply
+    with legal obligations, resolve disputes, enforce agreements,
+    and maintain security.
+  </p>
+
+  <h2>8. Account and Data Deletion</h2>
+
+  <p>
+    Users may request deletion of their Jamvi Kuu Tips account
+    and associated personal information.
+  </p>
+
+  <p>
+    To request account deletion, contact the Jamvi Kuu Tips
+    support team through the official support contact provided
+    with the App.
+  </p>
+
+  <p>
+    Some information may be retained where required by law,
+    for legitimate security purposes, or for resolving
+    transactions and disputes.
+  </p>
+
+  <h2>9. Children's Privacy</h2>
+
+  <p>
+    Jamvi Kuu Tips is not intended to knowingly collect
+    personal information from children in violation of
+    applicable laws.
+  </p>
+
+  <h2>10. Third-Party Services</h2>
+
+  <p>
+    The App may use third-party services including Firebase,
+    Google AdMob, payment providers, and other services
+    required to provide App functionality.
+  </p>
+
+  <h2>11. Changes to This Privacy Policy</h2>
+
+  <p>
+    We may update this Privacy Policy from time to time.
+    When changes are made, the "Last updated" date will be
+    updated accordingly.
+  </p>
+
+<h2>12. Contact Us</h2>
+
+<p>
+  If you have questions about this Privacy Policy, our data
+  practices, or account deletion, please contact us using the
+  email address below.
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <a href="mailto:support.jamvikuutips@gmail.com">
+    support.jamvikuutips@gmail.com
+  </a>
+</p>
+
+<p>
+  <strong>App name:</strong> Jamvi Kuu Tips
+</p>
+
+<p>
+  <strong>Developer:</strong> thobias mabula
+</p>
+
+</div>
+
+</body>
+</html>
+  `);
+});
+// =====================================
 // JAMVI KUU TIPS - NORMAL USER AUTH
 // PHONE + PASSWORD - NO OTP
 // =====================================
@@ -4805,12 +5072,16 @@ app.post('/api/ai/analyze-match', async (req, res) => {
     // ======================================
 
     const awayFormResponse = await axios.get(
-      'https://v3.football.api-sports.io/fixtures',
-      {
-        
-        headers: apiHeaders,
-      }
-    );
+  'https://v3.football.api-sports.io/fixtures',
+  {
+    params: {
+      team: awayTeamId,
+      last: 5,
+      status: 'FT',
+    },
+    headers: apiHeaders,
+  }
+);
 
     console.log('================ RECENT FORM DEBUG ================');
 
@@ -5417,7 +5688,7 @@ function compactApiPrediction(prediction) {
 }
 
 const footballData = {
-  match: footballData?.match || matchData,
+  match: matchData,
 
   recentForm: {
     home: homeRecentForm || [],
