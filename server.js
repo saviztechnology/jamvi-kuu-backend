@@ -2531,123 +2531,12 @@ app.post(
 app.post(
   '/api/admin/migrate-old-payment',
   async (req, res) => {
-    try {
-      const firebaseUid =
-        'IqKTPeRjOHRXYHUiJnQNK1nym3f2';
-
-      const userDoc =
-        await db
-          .collection('users')
-          .doc(firebaseUid)
-          .get();
-
-      if (!userDoc.exists) {
-        return res.status(404).json({
-          success: false,
-          message:
-            'User document haipo',
-        });
-      }
-
-      const user =
-        userDoc.data();
-
-      if (!user.lastPaymentId) {
-        return res.status(400).json({
-          success: false,
-          message:
-            'Hakuna lastPaymentId kwenye user',
-        });
-      }
-
-      await db
-        .collection('payments')
-        .doc(user.lastPaymentId)
-        .set(
-          {
-            userId:
-              firebaseUid,
-
-            phoneNumber:
-              user.phoneNumber ??
-              '',
-
-            amount:
-              user.lastPaymentAmount ??
-              0,
-
-            currency:
-              user.lastPaymentCurrency ??
-              'TZS',
-
-            plan:
-              user.plan ??
-              'MONTHLY',
-
-            paymentStatus:
-              user.paymentStatus ??
-              'PAID',
-
-            paymentId:
-              user.lastPaymentId,
-
-            reference:
-              user.lastPaymentReference ??
-              '',
-
-            premiumStartDate:
-              user.premiumStartDate ??
-              null,
-
-            premiumExpiryDate:
-              user.premiumExpiryDate ??
-              null,
-
-            createdAt:
-              user.premiumStartDate ??
-              FieldValue.serverTimestamp(),
-
-            migrated:
-              true,
-
-            migratedAt:
-              FieldValue.serverTimestamp(),
-          },
-          {
-            merge: true,
-          },
-        );
-
-      console.log(
-        'OLD PAYMENT MIGRATED:',
-        user.lastPaymentId,
-      );
-
-      res.json({
-        success: true,
-        message:
-          'Old payment imehamishwa kwenye payments ✅',
-        paymentId:
-          user.lastPaymentId,
-      });
-
-    } catch (error) {
-      console.error(
-        'Payment migration error:',
-        error.message,
-      );
-
-      res.status(500).json({
-        success: false,
-        message:
-          'Migration imeshindikana',
-        error:
-          error.message,
-      });
-    }
+    return res.status(410).json({
+      success: false,
+      message: 'Migration endpoint imefungwa.',
+    });
   },
 );
-
 // =====================================
 // VERIFY PAYMENT NA KUMPA USER VIP
 // =====================================
@@ -2655,6 +2544,31 @@ app.post(
 app.get(
   '/api/payment/verify/:chargeId',
   async (req, res) => {
+    
+        const authHeader = req.headers.authorization;
+
+    if (!authHeader ||
+        !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication inahitajika.',
+      });
+    }
+
+    const idToken =
+      authHeader.split('Bearer ')[1];
+
+    let decodedToken;
+
+    try {
+      decodedToken =
+        await auth.verifyIdToken(idToken);
+    } catch (error) {
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication token si halali.',
+      });
+    }
     try {
       const {
         chargeId,
@@ -2730,13 +2644,24 @@ app.get(
         charge.meta?.plan;
 
       if (!firebaseUid) {
-        return res.status(400).json({
-          success: false,
-          message:
-            'Firebase UID haipo kwenye payment',
-        });
-      }
+  return res.status(400).json({
+    success: false,
+    message:
+      'Firebase UID haipo kwenye payment',
+  });
+}
 
+// =====================================
+// CHECK PAYMENT OWNERSHIP
+// =====================================
+
+if (decodedToken.uid !== firebaseUid) {
+  return res.status(403).json({
+    success: false,
+    message:
+      'Huna ruhusa ya kuthibitisha payment hii.',
+  });
+}
       if (!plan) {
         return res.status(400).json({
           success: false,
