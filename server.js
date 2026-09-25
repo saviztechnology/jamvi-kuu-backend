@@ -33,6 +33,57 @@ app.use(cors());
 app.use(express.json());
 
 // =====================================
+// ADMIN AUTH MIDDLEWARE
+// =====================================
+
+async function requireAdmin(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (
+    !authHeader ||
+    !authHeader.startsWith('Bearer ')
+  ) {
+    return res.status(401).json({
+      success: false,
+      message:
+        'Authentication ya admin inahitajika.',
+    });
+  }
+
+  const idToken =
+    authHeader.substring(7);
+
+  try {
+    const decodedToken =
+      await auth.verifyIdToken(idToken);
+
+    if (decodedToken.admin !== true) {
+      return res.status(403).json({
+        success: false,
+        message:
+          'Huna ruhusa ya admin.',
+      });
+    }
+
+    req.adminUser = decodedToken;
+
+    next();
+
+  } catch (error) {
+    console.error(
+      'ADMIN AUTH ERROR:',
+      error.message,
+    );
+
+    return res.status(401).json({
+      success: false,
+      message:
+        'Authentication token si halali.',
+    });
+  }
+}
+
+// =====================================
 // JAMVI KUU TIPS - PRIVACY POLICY
 // =====================================
 
@@ -854,6 +905,7 @@ let selectedMatchState = null;
 
 app.post(
   '/api/football/select-match',
+  requireAdmin,
   async (req, res) => {
     try {
       const {
@@ -4456,11 +4508,18 @@ function stopSelectedMatchMonitoring() {
 // MANUAL SELECTED MATCH MONITOR
 // =====================================
 
-app.get(
-  '/api/football/monitor-selected-match',
+app.post(
+  '/api/football/select-match',
+  requireAdmin,
   async (req, res) => {
     try {
-      if (!selectedMatch) {
+      const {
+        fixtureId,
+        homeTeam,
+        awayTeam,
+      } = req.body;
+
+      if (!fixtureId) {
         return res.json({
           success: false,
 
